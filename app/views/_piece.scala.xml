@@ -1,0 +1,20 @@
+@(piece: Piece)
+	<piece>
+		<name>@piece.getName()</name>
+		<weight>@piece.getWeight()</weight>
+		<tags>
+			@for(tag <- piece.getTags()) {
+				<tag>
+					<name>@tag.getName()</name>
+				</tag>				
+				}
+		</tags>
+		<prize>@piece.getPrize()</prize>
+		<material>@piece.getMaterial()</material>
+		<lifetime>@piece.getLifetime()</lifetime>
+		<description>@piece.getDescription()</description>
+		<default>@piece.isDef()</default>
+	</piece>
+	
+	
+	
