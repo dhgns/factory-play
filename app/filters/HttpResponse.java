@@ -116,7 +116,7 @@ public class HttpResponse {
 
 	public static Result buildResponseError(Request request, int status, String msg) {
 		if(request.accepts("application/json")) {
-			String msgRet = "\"response\":"+"\""+msg+"\""+"\"response\"";
+			String msgRet = "{\"response\":"+"\""+msg+"\"}";
 			return play.mvc.Results.status(status, msgRet);
 		}else if(request.accepts("application/xml")) {
 			String msgRet = "<response>"+msg+"</response>";
