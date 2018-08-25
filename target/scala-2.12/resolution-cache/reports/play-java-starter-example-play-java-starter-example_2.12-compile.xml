@@ -7,7 +7,7 @@
 		revision="1.0-SNAPSHOT"
 		conf="compile"
 		confs="compile, runtime, test, provided, optional, universal, universal-docs, universal-src, windows, docker, linux, rpm, debian, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool, docs"
-		date="20180823211327"/>
+		date="20180825003442"/>
 	<dependencies>
 		<module organisation="com.google.code.gson" name="gson">
 			<revision name="2.3.1" status="release" pubdate="20141120104214" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://code.google.com/p/google-gson/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="85">

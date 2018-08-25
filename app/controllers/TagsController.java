@@ -21,6 +21,9 @@ public class TagsController extends Controller {
 		
 		String tagName = getTagFromJSONData(data);
 		
+		if(tagName == null)
+			return HttpResponse.buildResponseError(request(), BAD_REQUEST, "Json data not valid");
+
 		if(Tag.exist(tagName))
 			return HttpResponse.buildResponseOk(request(), "Tag already Exist");
 	
@@ -35,7 +38,12 @@ public class TagsController extends Controller {
     }
  	
     private String getTagFromJSONData(JsonNode data) {
-		String tagName = data.path("tag").toString();
+	    	String tagName;
+	    	try {
+			tagName = data.path("tag").toString();
+	    	}catch(Exception e) {
+	    		tagName = null;
+	    	}
     
 		return tagName;
 	}

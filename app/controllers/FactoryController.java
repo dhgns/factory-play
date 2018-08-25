@@ -30,10 +30,16 @@ public class FactoryController extends Controller {
 		
 		Piece piece = getPieceFromJSONData(data);
 		
+		if(piece == null)
+			return HttpResponse.buildResponseError(request(), BAD_REQUEST, "Invalid json data");
+		
 		if(Piece.exist(piece.getName()))
 			return HttpResponse.buildResponseOk(request(),"Piece already Exist");
 		
 		ArrayList <String> tags = getTagsFromJSONData(data);
+		
+		if(tags == null)
+			return HttpResponse.buildResponseError(request(), BAD_REQUEST, "Invalid json data");
 		
 		piece.save();
 		
@@ -42,7 +48,7 @@ public class FactoryController extends Controller {
 		}
 		
 		if(Piece.findByName(piece.getName()) == null) 
-			return internalServerError("Internal Server Error");
+			return HttpResponse.buildResponseError(request(), INTERNAL_SERVER_ERROR, "Somethis was wrong, sorry");
 		
 		return HttpResponse.buildResponseOk(request(),"New Piece Added");
     }
@@ -152,16 +158,23 @@ public class FactoryController extends Controller {
      * @return Array of Strings with the tags
      */
     private ArrayList<String> getTagsFromJSONData(JsonNode data){
-    		
-    		ArrayNode tagsJson = (ArrayNode) data.path("tags");
-    		
-    		ArrayList <String> tags = new ArrayList<>();
-    		
-    		for(JsonNode jsonNode : tagsJson) {
-    			tags.add(jsonNode.asText());
+    		    		
+    		ArrayList <String> tags;
+    	
+    		try{
+        		ArrayNode tagsJson = (ArrayNode) data.path("tags");
+
+    			tags = new ArrayList<>();
+    		    		
+	    		for(JsonNode jsonNode : tagsJson) {
+	    			tags.add(jsonNode.asText());
+	    		}
+    
+    		}catch(Exception e) {
+    			tags = null;
     		}
     		
-    		return tags;	
+    		return tags;
     }
     
     /**
@@ -171,17 +184,21 @@ public class FactoryController extends Controller {
      * @return Piece 
      */
     private Piece getPieceFromJSONData(JsonNode data) {
-		
-    		String name = data.path("name").textValue();
-		String material = data.path("material").textValue();
-		String description = data.path("description").textValue();
-		String lifetime = data.path("lifetime").textValue();
-		
-		Integer weight = data.path("weight").intValue();
-		Integer prize = data.path("prize").intValue();
-		boolean def = data.path("default").booleanValue();
-		
-		Piece p = new Piece(name, description, prize, weight, material, lifetime, def);
+    		Piece p;
+		try {
+	    		String name = data.path("name").textValue();
+			String material = data.path("material").textValue();
+			String description = data.path("description").textValue();
+			String lifetime = data.path("lifetime").textValue();
+			
+			Integer weight = data.path("weight").intValue();
+			Integer prize = data.path("prize").intValue();
+			boolean def = data.path("default").booleanValue();
+			
+			p = new Piece(name, description, prize, weight, material, lifetime, def);
+		}catch(Exception e) {
+			p = null;
+		}
 		
 		return p;
 	}
