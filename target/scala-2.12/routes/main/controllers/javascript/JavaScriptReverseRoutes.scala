@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/Delfin/eclipse-workspace/Recambios/conf/routes
-// @DATE:Thu Aug 23 21:11:46 CEST 2018
+// @DATE:Sun Aug 26 20:43:50 CEST 2018
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -66,6 +66,16 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "db"})
+        }
+      """
+    )
+  
+    // @LINE:30
+    def resetDB: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.DataBaseController.resetDB",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "db"})
         }
       """
     )
@@ -182,7 +192,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:31
+  // @LINE:32
   class ReverseTagsController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -190,7 +200,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:32
+    // @LINE:33
     def addTag: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TagsController.addTag",
       """
@@ -200,7 +210,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:33
+    // @LINE:34
     def getTags: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TagsController.getTags",
       """
@@ -210,7 +220,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:31
+    // @LINE:32
     def retrieveTag: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.TagsController.retrieveTag",
       """

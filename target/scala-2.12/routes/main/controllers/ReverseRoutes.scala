@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/Delfin/eclipse-workspace/Recambios/conf/routes
-// @DATE:Thu Aug 23 21:11:46 CEST 2018
+// @DATE:Sun Aug 26 20:43:50 CEST 2018
 
 import play.api.mvc.Call
 
@@ -53,6 +53,12 @@ package controllers {
     def deleteDB(): Call = {
       
       Call("DELETE", _prefix + { _defaultPrefix } + "db")
+    }
+  
+    // @LINE:30
+    def resetDB(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "db")
     }
   
   }
@@ -132,26 +138,26 @@ package controllers {
   
   }
 
-  // @LINE:31
+  // @LINE:32
   class ReverseTagsController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:32
+    // @LINE:33
     def addTag(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "tag")
     }
   
-    // @LINE:33
+    // @LINE:34
     def getTags(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "tags")
     }
   
-    // @LINE:31
+    // @LINE:32
     def retrieveTag(tag:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "tag/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("tag", tag)))

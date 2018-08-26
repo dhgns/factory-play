@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/Delfin/eclipse-workspace/Recambios/conf/routes
-// @DATE:Thu Aug 23 21:11:46 CEST 2018
+// @DATE:Sun Aug 26 20:43:50 CEST 2018
 
 package router
 
@@ -27,7 +27,7 @@ class Routes(
   FactoryController_4: controllers.FactoryController,
   // @LINE:29
   DataBaseController_0: controllers.DataBaseController,
-  // @LINE:31
+  // @LINE:32
   TagsController_6: controllers.TagsController,
   val prefix: String
 ) extends GeneratedRouter {
@@ -46,7 +46,7 @@ class Routes(
     FactoryController_4: controllers.FactoryController,
     // @LINE:29
     DataBaseController_0: controllers.DataBaseController,
-    // @LINE:31
+    // @LINE:32
     TagsController_6: controllers.TagsController
   ) = this(errorHandler, HomeController_2, CountController_1, AsyncController_3, Assets_5, FactoryController_4, DataBaseController_0, TagsController_6, "/")
 
@@ -71,6 +71,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """pieces""", """controllers.FactoryController.getPieces"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """pieces/""" + "$" + """tag<[^/]+>""", """controllers.FactoryController.findPiecesByTag(tag:String)"""),
     ("""DELETE""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """db""", """controllers.DataBaseController.deleteDB()"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """db""", """controllers.DataBaseController.resetDB()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tag/""" + "$" + """tag<[^/]+>""", """controllers.TagsController.retrieveTag(tag:String)"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tag""", """controllers.TagsController.addTag()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tags""", """controllers.TagsController.getTags()"""),
@@ -279,11 +280,29 @@ class Routes(
     )
   )
 
-  // @LINE:31
-  private[this] lazy val controllers_TagsController_retrieveTag11_route = Route("GET",
+  // @LINE:30
+  private[this] lazy val controllers_DataBaseController_resetDB11_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("db")))
+  )
+  private[this] lazy val controllers_DataBaseController_resetDB11_invoker = createInvoker(
+    DataBaseController_0.resetDB(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.DataBaseController",
+      "resetDB",
+      Nil,
+      "GET",
+      this.prefix + """db""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:32
+  private[this] lazy val controllers_TagsController_retrieveTag12_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("tag/"), DynamicPart("tag", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_TagsController_retrieveTag11_invoker = createInvoker(
+  private[this] lazy val controllers_TagsController_retrieveTag12_invoker = createInvoker(
     TagsController_6.retrieveTag(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -297,11 +316,11 @@ class Routes(
     )
   )
 
-  // @LINE:32
-  private[this] lazy val controllers_TagsController_addTag12_route = Route("POST",
+  // @LINE:33
+  private[this] lazy val controllers_TagsController_addTag13_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("tag")))
   )
-  private[this] lazy val controllers_TagsController_addTag12_invoker = createInvoker(
+  private[this] lazy val controllers_TagsController_addTag13_invoker = createInvoker(
     TagsController_6.addTag(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -315,11 +334,11 @@ class Routes(
     )
   )
 
-  // @LINE:33
-  private[this] lazy val controllers_TagsController_getTags13_route = Route("GET",
+  // @LINE:34
+  private[this] lazy val controllers_TagsController_getTags14_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("tags")))
   )
-  private[this] lazy val controllers_TagsController_getTags13_invoker = createInvoker(
+  private[this] lazy val controllers_TagsController_getTags14_invoker = createInvoker(
     TagsController_6.getTags(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -402,22 +421,28 @@ class Routes(
         controllers_DataBaseController_deleteDB10_invoker.call(DataBaseController_0.deleteDB())
       }
   
-    // @LINE:31
-    case controllers_TagsController_retrieveTag11_route(params@_) =>
-      call(params.fromPath[String]("tag", None)) { (tag) =>
-        controllers_TagsController_retrieveTag11_invoker.call(TagsController_6.retrieveTag(tag))
+    // @LINE:30
+    case controllers_DataBaseController_resetDB11_route(params@_) =>
+      call { 
+        controllers_DataBaseController_resetDB11_invoker.call(DataBaseController_0.resetDB())
       }
   
     // @LINE:32
-    case controllers_TagsController_addTag12_route(params@_) =>
-      call { 
-        controllers_TagsController_addTag12_invoker.call(TagsController_6.addTag())
+    case controllers_TagsController_retrieveTag12_route(params@_) =>
+      call(params.fromPath[String]("tag", None)) { (tag) =>
+        controllers_TagsController_retrieveTag12_invoker.call(TagsController_6.retrieveTag(tag))
       }
   
     // @LINE:33
-    case controllers_TagsController_getTags13_route(params@_) =>
+    case controllers_TagsController_addTag13_route(params@_) =>
       call { 
-        controllers_TagsController_getTags13_invoker.call(TagsController_6.getTags())
+        controllers_TagsController_addTag13_invoker.call(TagsController_6.addTag())
+      }
+  
+    // @LINE:34
+    case controllers_TagsController_getTags14_route(params@_) =>
+      call { 
+        controllers_TagsController_getTags14_invoker.call(TagsController_6.getTags())
       }
   }
 }

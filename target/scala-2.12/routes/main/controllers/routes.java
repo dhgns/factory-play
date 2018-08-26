@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:/Users/Delfin/eclipse-workspace/Recambios/conf/routes
-// @DATE:Thu Aug 23 21:11:46 CEST 2018
+// @DATE:Sun Aug 26 20:43:50 CEST 2018
 
 package controllers;
 

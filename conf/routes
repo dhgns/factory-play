@@ -27,6 +27,7 @@ GET 		/pieces 					    controllers.FactoryController.getPieces
 GET 		/pieces/:tag					controllers.FactoryController.findPiecesByTag(tag: String)
 
 DELETE  /db							controllers.DataBaseController.deleteDB()
+GET 		/db							controllers.DataBaseController.resetDB()
 
 GET  	/tag/:tag					controllers.TagsController.retrieveTag(tag: String)
 POST 	/tag						controllers.TagsController.addTag()
